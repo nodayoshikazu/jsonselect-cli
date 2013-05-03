@@ -1,5 +1,8 @@
 #jsonselect-cli
 
+A command line tool to execute jsonselect on input JSON (file or stdin). Outputs selected JSON elements.
+
+
  [![Build Status](https://api.travis-ci.org/nodayoshikazu/jsonselect-cli.png)](http://travis-ci.org/nodayoshikazu/jsonselect-cli)
 
 
