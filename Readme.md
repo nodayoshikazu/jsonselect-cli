@@ -22,6 +22,119 @@
 
 #Usage
 
+    Usage: index.js <selector> [-f infile] [-o outfile]
+
+    Options:
+
+    -h, --help              output usage information
+    -?                      output usage information
+    -V, --version           output the version number
+    -f, --file <infile>     JSON file
+    -o, --output <outfile>  JSON file
+
+#Examples
+
+  Sample input JSON
+
+    {
+      "name": {
+        "first": "Lloyd",
+        "last": "Hilaiel"
+      },
+      "favoriteColor": "yellow",
+      "languagesSpoken": [
+        {
+          "lang": "Bulgarian",
+          "level": "advanced"
+        },
+        {
+          "lang": "English",
+          "level": "native",
+          "preferred": true
+        },
+        {
+          "lang": "Spanish",
+          "level": "beginner"
+        }
+      ],
+      "seatingPreference": [
+        "window",
+        "aisle"
+      ],
+      "drinkPreference": [
+        "whiskey",
+        "beer",
+        "wine"
+      ],
+      "weight": 172
+    }
+
+  Results
+  
+    $ node lib/index.js ":root" < test/sample1.json
+    [{"name":{"first":"Lloyd","last":"Hilaiel"},"favoriteColor":"yellow","languagesSpoken":[{"lang":"Bulgarian","level":"advanced"},{"lang":"English","level":"native","preferred":true},{"lang":"Spanish","level":"beginner"}],"seatingPreference":["window","aisle"],"drinkPreference":["whiskey","beer","wine"],"weight":172}]
+    
+    $ node lib/index.js ":root" -f test/sample1.json
+    [{"name":{"first":"Lloyd","last":"Hilaiel"},"favoriteColor":"yellow","languagesSpoken":[{"lang":"Bulgarian","level":"advanced"},{"lang":"English","level":"native","preferred":true},{"lang":"Spanish","level":"beginner"}],"seatingPreference":["window","aisle"],"drinkPreference":["whiskey","beer","wine"],"weight":172}]
+    
+    $ node lib/index.js ":root" -f test/sample1.json -o test/root-out.obj
+    
+    $ node lib/index.js ".languagesSpoken .lang" -f test/sample1.json
+    ["Bulgarian","English","Spanish"]
+    
+    $ node lib/index.js ".drinkPreference :first-child" -f test/sample1.json
+    ["whiskey"]
+    
+    $ node lib/index.js ".seatingPreference :nth-child(1)" -f test/sample1.json
+    ["window"]
+    
+    $ node lib/index.js ".weight" -f test/sample1.json
+    [172]
+    
+    $ node lib/index.js ".lang" -f test/sample1.json
+    ["Bulgarian","English","Spanish"]
+    
+    $ node lib/index.js ".favoriteColor" -f test/sample1.json
+    ["yellow"]
+    
+    $ node lib/index.js "string.favoriteColor" -f test/sample1.json
+    ["yellow"]
+    
+    $ node lib/index.js "string:last-child" -f test/sample1.json
+    ["aisle","wine"]
+    
+    $ node lib/index.js "string:nth-child(-n+2)" -f test/sample1.json
+    ["window","aisle","whiskey","beer"]
+    
+    $ node lib/index.js "string:nth-child(odd)" -f test/sample1.json
+    ["window","whiskey","wine"]
+    
+    $ node lib/index.js "string:nth-last-child(1)" -f test/sample1.json
+    ["aisle","wine"]
+    
+    $ node lib/index.js ":root" -f test/sample1.json
+    [{"name":{"first":"Lloyd","last":"Hilaiel"},"favoriteColor":"yellow","languagesSpoken":[{"lang":"Bulgarian","level":"advanced"},{"lang":"English","level":"native","preferred":true},{"lang":"Spanish","level":"beginner"}],"seatingPreference":["window","aisle"],"drinkPreference":["whiskey","beer","wine"],"weight":172}]
+    
+    $ node lib/index.js "number" -f test/sample1.json
+    [172]
+    
+    $ node lib/index.js ":has(:root > .preferred)" -f test/sample1.json
+    [{"lang":"English","level":"native","preferred":true}]
+    
+    $ node lib/index.js ".preferred ~ .lang" -f test/sample1.json
+    ["English"]
+    
+    $ node lib/index.js ":has(.lang:val(\"Spanish\")) > .level" -f test/sample1.json
+    ["beginner"]
+    
+    $ node lib/index.js ".lang:val(\"Bulgarian\") ~ .level" -f test/sample1.json
+    ["advanced"]
+    
+    $ node lib/index.js ".weight:expr(x<180) ~ .name .first" -f test/sample1.json
+    ["Lloyd"]
+
+
+
 
 
 #License 
