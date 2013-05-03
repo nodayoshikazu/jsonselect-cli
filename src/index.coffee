@@ -14,6 +14,10 @@
 # -?, -h, --help print usage + help options
 # -f, --file <filename> read JSON data from the file specified; if -f is omitted, use stdin
 # -o, --output <filename> write the rendered result to the filename specified; if -o is omitted, use stdout#
+#
+#
+#  Author: Noda Yoshikazu <noda.yoshikazu@gmail.com>
+#  last update: May 3, 2013
 # 
 jsonselect = require('jsonselect')
 _       = require('underscore')
