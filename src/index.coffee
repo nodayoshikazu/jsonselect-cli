@@ -30,7 +30,8 @@ fs      = require('fs')
 module.exports = class Jsonselect_Cli
     args = null
     jsonIn = null
-
+    jsonText = null
+    
     #
     # Creates Jsonselect_Cli object
     # 
@@ -57,14 +58,17 @@ module.exports = class Jsonselect_Cli
         else
             process.stdin.resume()
             process.stdin.setEncoding('utf8')
+            @jsonText = ''
             process.stdin.on 'data', (chunk) =>
                 if not chunk.match /^[ \t\n]*$/g
                     try
-                        @jsonIn = JSON.parse(chunk)
+                        @jsonText += chunk
+                        
                     catch err
                         console.log 'Error: malformed JSON'
                         return -1
             process.stdin.on 'end', () =>
+                @jsonIn = JSON.parse(@jsonText)                
                 @_apply()
 
     #
