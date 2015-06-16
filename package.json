@@ -13,10 +13,8 @@
     "url": "https://github.com/nodayoshikazu/jsonselect-cli.git"
   },
   "dependencies": {
-    "should": "~1.2.2",
     "commander": "~1.1.1",
     "underscore": "~1.4.4",
-    "coffee-script": "~1.6.2"
   },
   "devDependencies": {
     "should": ">= 0.0.1"
@@ -27,5 +25,9 @@
   },
   "engines": {
     "node": ">= 0.8.x"
+  }
+  "devDependencies": {
+    "should": "~1.2.2",
+    "coffee-script": "~1.6.2"
   }
 }
