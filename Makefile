@@ -15,30 +15,30 @@ clean: clean-docs
 	rm -rf lib/ test/*.js
 
 build:
-	./node_modules/coffee-script/bin/coffee -o lib/ -c src/
+	./node_modules/coffee-script/bin/coffee -o ./jsonselect-cli/ -c src/
 
 test:
-	node lib/index.js ":root" < test/sample1.json
-	node lib/index.js ":root" -f test/sample1.json
-	node lib/index.js ":root" -f test/sample1.json -o test/root-out.obj
-	node lib/index.js ".languagesSpoken .lang" -f test/sample1.json
-	node lib/index.js ".drinkPreference :first-child" -f test/sample1.json
-	node lib/index.js ".seatingPreference :nth-child(1)" -f test/sample1.json
-	node lib/index.js ".weight" -f test/sample1.json
-	node lib/index.js ".lang" -f test/sample1.json
-	node lib/index.js ".favoriteColor" -f test/sample1.json
-	node lib/index.js "string.favoriteColor" -f test/sample1.json
-	node lib/index.js "string:last-child" -f test/sample1.json
-	node lib/index.js "string:nth-child(-n+2)" -f test/sample1.json
-	node lib/index.js "string:nth-child(odd)" -f test/sample1.json
-	node lib/index.js "string:nth-last-child(1)" -f test/sample1.json
-	node lib/index.js ":root" -f test/sample1.json
-	node lib/index.js "number" -f test/sample1.json
-	node lib/index.js ":has(:root > .preferred)" -f test/sample1.json
-	node lib/index.js ".preferred ~ .lang" -f test/sample1.json
-	node lib/index.js ":has(.lang:val(\"Spanish\")) > .level" -f test/sample1.json
-	node lib/index.js ".lang:val(\"Bulgarian\") ~ .level" -f test/sample1.json
-	node lib/index.js ".weight:expr(x<180) ~ .name .first" -f test/sample1.json
+	node ./jsonselect-cli ":root" < test/sample1.json
+	node ./jsonselect-cli ":root" -f test/sample1.json
+	node ./jsonselect-cli ":root" -f test/sample1.json -o test/root-out.obj
+	node ./jsonselect-cli ".languagesSpoken .lang" -f test/sample1.json
+	node ./jsonselect-cli ".drinkPreference :first-child" -f test/sample1.json
+	node ./jsonselect-cli ".seatingPreference :nth-child(1)" -f test/sample1.json
+	node ./jsonselect-cli ".weight" -f test/sample1.json
+	node ./jsonselect-cli ".lang" -f test/sample1.json
+	node ./jsonselect-cli ".favoriteColor" -f test/sample1.json
+	node ./jsonselect-cli "string.favoriteColor" -f test/sample1.json
+	node ./jsonselect-cli "string:last-child" -f test/sample1.json
+	node ./jsonselect-cli "string:nth-child(-n+2)" -f test/sample1.json
+	node ./jsonselect-cli "string:nth-child(odd)" -f test/sample1.json
+	node ./jsonselect-cli "string:nth-last-child(1)" -f test/sample1.json
+	node ./jsonselect-cli ":root" -f test/sample1.json
+	node ./jsonselect-cli "number" -f test/sample1.json
+	node ./jsonselect-cli ":has(:root > .preferred)" -f test/sample1.json
+	node ./jsonselect-cli ".preferred ~ .lang" -f test/sample1.json
+	node ./jsonselect-cli ":has(.lang:val(\"Spanish\")) > .level" -f test/sample1.json
+	node ./jsonselect-cli ".lang:val(\"Bulgarian\") ~ .level" -f test/sample1.json
+	node ./jsonselect-cli ".weight:expr(x<180) ~ .name .first" -f test/sample1.json
 
 dist: clean init docs build test
 
